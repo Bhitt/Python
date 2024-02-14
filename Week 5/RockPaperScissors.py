@@ -3,21 +3,25 @@ import numpy
 def main():
     # initialize the number of games
     numGames = 3
-    
+
     # initialize the valid choices in a list
     validChoices = ["rock","paper","scissors"]
-
-    # ask for the user input
-    userChoice = input("Would you like rock, paper, or scissors:\n")
-    while(userChoice not in validChoices):
-        userChoice = input("Would you like rock, paper, or scissors:\n")
     
-    # get the ai's input
-    index = numpy.random.randint(0,len(validChoices))
-    aiChoice = validChoices[index]
+    for game in range(0,numGames):
+        # ask for the user input
+        print("~~~~~~~~~~~~~~~~~~~~")
+        userChoice = input("Would you like rock, paper, or scissors:\n")
+        while(userChoice not in validChoices):
+            userChoice = input("Would you like rock, paper, or scissors:\n")
+        
+        # get the ai's input
+        index = numpy.random.randint(0,len(validChoices))
+        aiChoice = validChoices[index]
 
-    # call the function
-    determineWinner(userChoice, aiChoice)
+        # call the function
+        print ("Game "+str(game)+":")
+        determineWinner(userChoice, aiChoice)
+
 
 def determineWinner(userChoice, aiChoice):
     print ("The ai chose: "+aiChoice)
