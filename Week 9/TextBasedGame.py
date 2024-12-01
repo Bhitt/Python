@@ -4,9 +4,9 @@ import numpy as np
 #////////////////////////////
 # GLOBAL VARIABLES
 #////////////////////////////
+HAS_AXE = False
 HAS_PICKAXE = False
 HAS_FISHINGPOLE = False
-HAS_AXE = False
 INV_WOOD = 0
 INV_ROCK = 0
 INV_LEAF = 0
@@ -19,6 +19,7 @@ HAS_FIRE = False
 
 AVAILABLE_COMMANDS = set(("Options","Exit","Harvest Wood"))
 PREVIOUS_COMMAND = ""
+DEV_COMMANDS = set(("skip to part 2", "error prevention"))
 
 #////////////////////////////
 # terminal text color functions
@@ -68,15 +69,21 @@ def UpdateRocks():
 def ProcessCommands():
     global AVAILABLE_COMMANDS
     global PREVIOUS_COMMAND
+    global DEV_COMMANDS
     # get the command
     command = input("c~: ").lower()
     # check for repeat command
     if (command == "r"):
         command = PREVIOUS_COMMAND
+    # check for dev command
+    if (command == "dev"):
+        AVAILABLE_COMMANDS.update(DEV_COMMANDS)
+        return True
     # check if command is available
     if (command not in (c.lower() for c in AVAILABLE_COMMANDS)):
         PrintResponse("command: (" + command + ") not found. Type 'options' for a list of available commands")
         return True
+
         
     
     # check for valid commands
@@ -107,6 +114,9 @@ def ProcessCommands():
     elif (command == "make fire"):
         C_MakeFire ()
 
+    # check for dev commands
+    if (command == "skip to part 2"):
+        C_SkipToPart2()
     # keep track of the command
     PREVIOUS_COMMAND = command
 
@@ -349,7 +359,153 @@ def C_CountTwine():
 def C_CountRocks():
     global INV_ROCK
     prInfo("I have " + str(INV_ROCK) + " rocks")
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def C_SkipToPart2():
+    global HAS_AXE
+    global HAS_PICKAXE
+    global INV_WOOD
+    global INV_ROCK
+    global INV_LEAF
+    global INV_TWINE
+    global HAS_SMALLROCK
+    global HAS_FIRE
+    global AVAILABLE_COMMANDS
+    HAS_AXE = True
+    HAS_PICKAXE = True
+    INV_WOOD = 100
+    INV_ROCK = 50
+    INV_LEAF = 1500
+    INV_TWINE = 9
+    HAS_SMALLROCK = False
+    HAS_FIRE = True
+    Part1Commands = set(("Look Around", "Pick Up Axe", "Count Wood", "Count Leaves", "Pick Up Rock", "Make Pickaxe", "Harvest Rocks", "Count Twine", "Count Rocks", "Make Fire"))
+    AVAILABLE_COMMANDS.update(Part1Commands)
+
+
+  
 
 
 # Output Functions
